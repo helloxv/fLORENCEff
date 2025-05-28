@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeSteps - Glamorous Sandals</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #fff7f2;
+            color: #4a3c5e;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: linear-gradient(to right, #f8b7a1, #d8a7ca);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.2rem 3rem;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #f9d7c4;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #f9d7c4;
+        }
+
+        .cart-icon {
+            font-size: 1.6rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f28d77;
+            color: #fff;
+            border-radius: 50%;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #d8a7ca;
+                padding: 1.5rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 183, 161, 0.3);
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            animation: zoomIn 1.2s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .cta-button {
+            background: #f28d77;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #d86b5a;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .products h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #d86b5a;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .product-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            animation: popIn 0.8s ease-out;
+        }
+
+        .product-item h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 1rem 0 0.5rem;
+            color: #4a3c5e;
+        }
+
+        .product-item p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background: #d8a7ca;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #b68cb1;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 3rem;
+            background: linear-gradient(to bottom, #fff7f2, #f9e1d9);
+            text-align: center;
+        }
+
+        .about h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #d86b5a;
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #d86b5a;
+            margin-bottom: 2rem;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 1rem;
+            border: 2px solid #f9d7c4;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact input:focus,
+        .contact textarea:focus {
+            border-color: #d86b5a;
+            box-shadow: 0 0 8px rgba(216, 107, 90, 0.3);
+            outline: none;
+        }
+
+        .contact button {
+            background: #f28d77;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact button:hover {
+            background: #d86b5a;
+            transform: translateY(-3px);
+        }
+
+        #contact-message {
+            margin-top: 1rem;
+            text-align: center;
+            color: #d86b5a;
+            display: none;
+            animation: popIn 0.5s ease-out;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: popIn 0.5s ease-out;
+        }
+
+        .cart-content h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+            color: #d86b5a;
+        }
+
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid #f9d7c4;
+            transition: background 0.3s;
+        }
+
+        .cart-item:hover {
+            background: #f9e1d9;
+        }
+
+        .cart-item button {
+            background: #f28d77;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cart-item button:hover {
+            background: #d86b5a;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            margin: 1.5rem 0;
+            color: #d86b5a;
+            font-size: 1.2rem;
+        }
+
+        .cart-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-form input {
+            padding: 1rem;
+            border: 2px solid #f9d7c4;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .cart-form input:focus {
+            border-color: #d86b5a;
+            outline: none;
+        }
+
+        .cart-form button {
+            background: #f28d77;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-form button:hover {
+            background: #d86b5a;
+            transform: translateY(-3px);
+        }
+
+        #cart-message {
+            margin-top: 1rem;
+            text-align: center;
+            color: #d86b5a;
+            display: none;
+            animation: popIn 0.5s ease-out;
+        }
+
+        .close-cart {
+            background: #f9d7c4;
+            color: #4a3c5e;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .close-cart:hover {
+            background: #f5c1a9;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #f8b7a1, #d8a7ca);
+            color: #fff;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #f9d7c4;
+            transform: rotate(10deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">LuxeSteps</div>
+            <div class="menu-toggle">☰</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <div class="cart-icon">
+                        🛍️ <span class="cart-count">0</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>LuxeSteps</h1>
+            <p>Elevate every step with our luxurious sandals.</p>
+            <a href="#products" class="cta-button">Discover Now</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2>Our Luxe Collection</h2>
+        <div class="product-grid">
+            <div class="product-item" data-price="60">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Rose Elegance">
+                <h3>Rose Elegance</h3>
+                <p>Delicate rose gold straps for timeless beauty.</p>
+                <p>$60</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-item" data-price="55">
+                <img src="1.jpg" alt="Peach Bliss">
+                <h3>Peach Bliss</h3>
+                <p>Soft peach tones for a chic look.</p>
+                <p>$55</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-item" data-price="48">
+                <img src="2.jpg" alt="Lavender Dream">
+                <h3>Lavender Dream</h3>
+                <p>Light lavender sandals for dreamy walks.</p>
+                <p>$48</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-item" data-price="65">
+                <img src="3.jpg" alt="Starlight Sparkle">
+                <h3>Starlight Sparkle</h3>
+                <p>Glittering heels for evening glamour.</p>
+                <p>$65</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-item" data-price="50">
+                <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1" alt="Coral Charm">
+                <h3>Coral Charm</h3>
+                <p>Vibrant coral for bold style.</p>
+                <p>$50</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-item" data-price="45">
+                <img src="4.jpg" alt="Breezy Bloom">
+                <h3>Breezy Bloom</h3>
+                <p>Floral-inspired flats for comfort.</p>
+                <p>$45</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About LuxeSteps</h2>
+        <p>LuxeSteps is where elegance meets comfort. Our sandals are designed to make every moment sparkle, blending luxurious materials with feminine flair. Step into a world of style and sophistication with our curated collection.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Get in Touch</h2>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="contact-message">Thank you for your message!</p>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal">
+        <div class="cart-content">
+            <h2>Your Luxe Cart</h2>
+            <div class="cart-items"></div>
+            <div class="cart-total">Total: $0</div>
+            <form class="cart-form">
+                <input type="text" id="cart-name" placeholder="Your Name" required>
+                <input type="email" id="cart-email" placeholder="Your Email" required>
+                <button type="submit">Place Order</button>
+            </form>
+            <p id="cart-message">Order placed successfully!</p>
+            <button class="close-cart">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 LuxeSteps. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cart Functionality
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartModal = document.querySelector('.cart-modal');
+        const closeCart = document.querySelector('.close-cart');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotal = document.querySelector('.cart-total');
+        const cartForm = document.querySelector('.cart-form');
+        const cartMessage = document.getElementById('cart-message');
+        const cartCount = document.querySelector('.cart-count');
+        let cart = [];
+
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <span>${item.name} - $${item.price}</span>
+                    <button onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            cartTotal.textContent = `Total: $${total}`;
+            cartCount.textContent = cart.length;
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const name = item.querySelector('h3').textContent;
+                const price = parseInt(item.getAttribute('data-price'));
+                addToCart(name, price);
+            });
+        });
+
+        cartIcon.addEventListener('click', () => {
+            cartModal.style.display = 'flex';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        cartForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('cart-name').value.trim();
+            const email = document.getElementById('cart-email').value.trim();
+
+            if (name && email && cart.length > 0) {
+                cartMessage.style.display = 'block';
+                cart = [];
+                updateCart();
+                cartForm.reset();
+                setTimeout(() => {
+                    cartMessage.style.display = 'none';
+                    cartModal.style.display = 'none';
+                }, 3000);
+            } else {
+                alert('Please fill in all fields and add items to the cart.');
+            }
+        });
+
+        // Contact Form
+        const contactForm = document.getElementById('contact-form');
+        const contactMessage = document.getElementById('contact-message');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (name && email && message) {
+                contactMessage.style.display = 'block';
+                contactForm.reset();
+                setTimeout(() => {
+                    contactMessage.style.display = 'none';
+                }, 3000);
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
